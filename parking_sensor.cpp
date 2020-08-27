@@ -34,25 +34,25 @@ int measureUp(){                                                                
 }
 
 void ledBlink(){
- if ((measureUp()<4||measureUp()>=400)){                                                   //blue LED will blink if the object is not in the sensors detection range
+ if ((measureUp()<4||measureUp()>=400)){                                                   //blue LED will flash if the object is not in the sensors detection range
     digitalWrite(PIN_LED_BLUE,HIGH);
     delay(200);
     digitalWrite(PIN_LED_BLUE,LOW);
     delay(200);  
    }
-  else if((measureUp()<400&&measureUp()>50)){                                             //green LED will blink if the objekt is between 400 cm and 100 cm away
+  else if((measureUp()<400&&measureUp()>50)){                                             //green LED will flash if the objekt is between 400 cm and 100 cm away
     digitalWrite(PIN_LED_GREEN,HIGH);
     delay(200);
     digitalWrite(PIN_LED_GREEN,LOW);
     delay(200);  
   }
-  else if((measureUp()<=50&&measureUp()>=10)){                                              //yellow LED will blink if the object is between 100cm and 30cm away
+  else if((measureUp()<=50&&measureUp()>=10)){                                              //yellow LED will flash if the object is between 100cm and 30cm away
     digitalWrite(PIN_LED_YELLOW,HIGH);
     delay(200);
     digitalWrite(PIN_LED_YELLOW,LOW);
     delay(200);  
   }
-  else if((measureUp()<10&&measureUp()>=4)){                                               //red LED will blink if the objekt is between 30 cm and 4 cm away
+  else if((measureUp()<10&&measureUp()>=4)){                                               //red LED will flash if the objekt is between 30 cm and 4 cm away
     digitalWrite(PIN_LED_RED,HIGH);
     delay(200);
     digitalWrite(PIN_LED_RED,LOW);
