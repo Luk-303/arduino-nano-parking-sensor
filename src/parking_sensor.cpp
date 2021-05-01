@@ -21,14 +21,14 @@ const unsigned int PIN_ECHO=7;                                                  
 
 const unsigned int PIN_MOVEMENT=2;                                                        //Pin connected with movement sensor
 
-unsigned long timeStamp=0;                                                                //timestamp for millis() function
-unsigned long runTime=60000;                                                              //variable for how long the whole process is running
+unsigned long nTimestamp=0;                                                                //timestamp for millis() function
+unsigned long nRuntime=60000;                                                              //variable for how long the whole process is running
 
-bool state=false;                                                                         // state for InerruptServieRoutine
+bool bState=false;                                                                         // state for InerruptServieRoutine
 
 int measureUp(){                                                                          //function to messure the distance and calculate it to centimeters
-  int duration=0;
-  int distance=0;
+  int nDuration=0;
+  int nDistance=0;
 
   digitalWrite(PIN_TRIGGER,LOW);          
   delay(5);
@@ -36,10 +36,10 @@ int measureUp(){                                                                
   delay(10);
   digitalWrite(PIN_TRIGGER,LOW);
 
-  duration=pulseIn(PIN_ECHO,HIGH);        
-  distance=(duration/2) * 0.03432;
+  nDuration=pulseIn(PIN_ECHO,HIGH);        
+  nDistance=(nDuration/2) * 0.03432;
 
-  return distance;
+  return nDistance;
 }
 
 void ledBlink(){
@@ -70,7 +70,7 @@ void ledBlink(){
 }
 
 void pinMovementISR(){                                                                    //InterruptServiceRoutine to wake up the Arduino Nano when a movement is detected
-  state=true;
+  bState=true;
 }
 
 void enterSleep(){                                                                        //function to set sleep mode to highest power saving setting
@@ -91,7 +91,7 @@ void setup() {
 
   pinMode(PIN_MOVEMENT,INPUT);
   
-  timeStamp=millis();
+  nTimestamp=millis();
 
   Serial.begin(115200);
 }
@@ -100,13 +100,13 @@ void loop() {
    
   enterSleep();                                                                         //enter sleep mode and wait for an interrupt
   
-  if (state){
+  if (bState){
     sleep_disable();                                                                    //stop sleep mode
-    while(millis()-timeStamp<=runTime){                                                 //run programm for duration set in runTime
+    while(millis()-nTimestamp<=nRuntime){                                               //run programm for duration set in runTime
       ledBlink();
       }
-    timeStamp=millis();
-    state=false;                                                                       //stop loop and enter sleep mode again
+    nTimestamp=millis();
+    bState=false;                                                                       //stop loop and enter sleep mode again
   } 
 
 }
